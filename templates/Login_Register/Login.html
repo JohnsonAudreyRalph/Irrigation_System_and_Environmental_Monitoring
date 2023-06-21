@@ -1,0 +1,50 @@
+{% extends 'Base.html' %}
+{% load static %}
+{% block title %}Đăng nhập{% endblock title %}
+{% block style %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/Login.css' %}">
+{% endblock style %}
+{% block main %}
+    <div>
+        <div class="Login">
+            <div class="Login-head">
+                <h2>Đăng nhập</h2>
+            </div>
+
+            <div class="clear-loading spinner">
+                <span></span>
+            </div>
+
+            <form action="" method="post">
+                {% csrf_token %}
+                <input type="text" name="User_Name" id="User_Name" placeholder="User Name" required>
+                <input type="password" id="Password" name="Password" placeholder="Password" required>
+                
+                <div>
+                    <div class="submit">
+                        <button type="submit">Đăng nhập</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="container">
+        {% if messages %}
+            <div id="alert-message" class="alert alert-success" role="alert">
+                {% for message in messages %}
+                    {{message}}
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+{% endblock main %}
+{% block script %}
+    <script>
+        // Thông báo message hiện lên một khoảng thời gian rồi tự động tắt
+        setTimeout(function() {
+            var alertMessage = document.getElementById('alert-message');
+            alertMessage.style.display = 'none';
+        }, 5000);
+    </script>
+{% endblock script %}
