@@ -6,9 +6,6 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
 # Create your views here.
-# def index(req):
-#     return render(req, 'Base.html')
-
 class Login(View):
     def get(self, request):
         return render(request, 'Login_Register/Login.html')
@@ -46,23 +43,19 @@ class Register(View):
             print(username)
             print(Password)
             print(Confirm_Password)
-            # =============================== catch errors when registering ===============================
             if User.objects.filter(username=username):
-                # messages.error(request, "Username already exist! Please try some other username")
                 print("Người này đã tồn tại trước đó!")
                 print("Không lưu")
                 messages.warning(request, "Username đã tồn tại. Hãy sử dụng Username khác")
                 return render(request, 'Login_Register/Register.html')
             
             if User.objects.filter(email=email).exists():
-                # messages.error(request, "Email already Register")
                 print("Email đã được đăng ký")
                 print("Không lưu")
                 messages.warning(request, "Email đã được đăng ký trước đó.")
                 return render(request, 'Login_Register/Register.html')
             
             if Password!=Confirm_Password:
-                # messages.error(request, "Password didn't match!")
                 print("Mật khẩu không khớp")
                 print('Chưa lưu')
                 messages.warning(request, "Mật khẩu không khớp!")
@@ -78,11 +71,11 @@ class Register(View):
 
 def Logout(request):
     logout(request)
-    return render(request, 'Login_Register/Logout.html')
+    return redirect('/')
 
+def Accounts_settings(request):
+    return render(request, 'Accounts_settings.html')
 
 class Affter_Login(View):
     def get(self, request):
-        # return HttpResponse("Đã đăng nhập thành công")
-        logout(request)
-        return render(request, 'Login_Register/Logout.html')
+        return render(request, 'Login_Success.html')
