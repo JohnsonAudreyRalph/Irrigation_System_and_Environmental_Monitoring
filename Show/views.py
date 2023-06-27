@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
+import requests
+
 # Create your views here.
 class Login(View):
     def get(self, request):
@@ -78,4 +80,36 @@ def Accounts_settings(request):
 
 class Affter_Login(View):
     def get(self, request):
-        return render(request, 'Login_Success.html')
+        url = "http://solar-ctd.ddns.net/data/line"
+        response = requests.get(url)
+        data = response.json()
+
+        line1_power = data["data"]["line1"]["power"]
+        line1_volt = data["data"]["line1"]['volt']
+        line1_perform = data["data"]["line1"]["perform"]
+        line1_ampe = data["data"]["line1"]["ampe"]
+
+        line2_power = data["data"]["line2"]["power"]
+        line2_volt = data["data"]["line2"]['volt']
+        line2_perform = data["data"]["line2"]["perform"]
+        line2_ampe = data["data"]["line2"]["ampe"]
+
+        print("Line 1 Power:", line1_power)
+        print("Line 1 Volt: ", line1_volt)
+        print("Line 1 Perform: ", line1_perform)
+        print("Line 1 Ampe: ", line1_ampe)
+        print("Line 2 Power:", line2_power)
+        print("Line 2 Volt: ", line2_volt)
+        print("Line 2 Perform: ", line2_perform)
+        print("Line 2 Ampe: ", line2_ampe)
+        conx = {
+            'line1_power':line1_power,
+            'line1_volt':line1_volt,
+            'line1_perform':line1_perform,
+            'line1_ampe':line1_ampe,
+            'line2_power':line2_power,
+            'line2_volt':line2_volt,
+            'line2_perform':line2_perform,
+            'line2_ampe':line2_ampe
+        }
+        return render(request, 'Login_Success.html', conx)

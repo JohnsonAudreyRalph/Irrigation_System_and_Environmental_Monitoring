@@ -39,7 +39,6 @@
              </form>
         </div>
 
-
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
                 <li class="nav-item d-block d-lg-none">
@@ -93,7 +92,7 @@
     <aside id="sidebar" class="sidebar">
         <ul class="sidebar-nav" id="sidebar-nav">
             <li class="nav-item">
-                <a class="nav-link " href="index.html">
+                <a class="nav-link " href="#">
                     <i class="fa-solid fa-feather-pointed"></i>
                     <span>Thông tin 1</span>
                 </a>
@@ -189,6 +188,24 @@
         </ul>
     </aside>
     <main id="main" class="main">
+        <h1>Đây là dữ liệu lấy trực tiếp</h1>
+        <h2>Thông tin hệ thống</h2>
+        <ul>
+            <li>Thông số đường dây 1: </li>
+            <p>Công suất: {{line1_power}} W</p>
+            <p>Điện áp: {{line1_volt}} V</p>
+            <p>Hiệu suất: {{line1_perform}} W/m2</p>
+            <p>Dòng điện: {{line1_ampe}} A</p>
+        </ul>
+        <hr>
+        <hr>
+        <ul>
+            <li>Thông số đường dây 2: </li>
+            <p>Công suất: {{line2_power}} W</p>
+            <p>Điện áp: {{line2_volt}} V</p>
+            <p>Hiệu suất: {{line2_perform}} W/m2</p>
+            <p>Dòng điện: {{line2_ampe}} A</p>
+        </ul>
         {% block main %}{% endblock main %}
     </main>
     <footer id="footer" class="footer">
